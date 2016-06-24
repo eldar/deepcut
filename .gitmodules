@@ -1,0 +1,6 @@
+[submodule "external/caffe"]
+	path = external/caffe
+	url = https://github.com/eldar/deepcut-cnn
+[submodule "external/solver"]
+	path = external/solver
+	url = https://github.com/mpi-inf-cia/pose-estimation

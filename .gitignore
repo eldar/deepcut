@@ -1,0 +1,9 @@
+*.sh
+*~
+*.pyc
+*.swp
+old/
+.directory
+mccExcludedFiles.log
+readme.txt
+data/*

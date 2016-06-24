@@ -1,0 +1,170 @@
+name: "ReIdTrackingTrial"
+layers {
+  name: "ReIdTrackingTrial"
+  type: HDF5_DATA
+  top: "data"
+  top: "label"
+  hdf5_data_param {
+    source: "../train_data_list_1.txt"
+    batch_size: 1280
+  }
+  include: { phase: TRAIN }
+}
+
+layers {
+  name: "ReIdTrackingTrial"
+  type: HDF5_DATA
+  top: "data"
+  top: "label"
+  hdf5_data_param {
+    source: "../test_data_list_1.txt"
+    batch_size: 1280
+  }
+  include: { phase: TEST }
+}
+
+layers {
+  name: "cutLabel"
+  type: SLICE
+  bottom: "label"
+  top: "gaze"
+  top: "headpose"
+  slice_param {
+    slice_dim: 1
+    slice_point: 2
+  }
+}
+
+layers {
+  name: "conv1"
+  type: CONVOLUTION
+  bottom: "data"
+  top: "conv1"
+  blobs_lr: 1
+  blobs_lr: 2
+  convolution_param {
+    num_output: 20
+    kernel_size: 5
+    stride: 1
+    weight_filler {
+      type: "gaussian"
+      std: 0.1
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layers {
+  name: "pool1"
+  type: POOLING
+  bottom: "conv1"
+  top: "pool1"
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    stride: 2
+  }
+}
+
+layers {
+  name: "conv2"
+  type: CONVOLUTION
+  bottom: "pool1"
+  top: "conv2"
+  blobs_lr: 1
+  blobs_lr: 2
+  convolution_param {
+    num_output: 50
+    kernel_size: 5
+    stride: 1
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+
+layers {
+  name: "pool2"
+  type: POOLING
+  bottom: "conv2"
+  top: "pool2"
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    stride: 2
+  }
+}
+
+layers {
+  name: "ip1"
+  type: INNER_PRODUCT
+  bottom: "pool2"
+  top: "ip1"
+  blobs_lr: 1
+  blobs_lr: 2
+  inner_product_param {
+    num_output: 500
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+
+layers {
+  name: "relu1"
+  type: RELU
+  bottom: "ip1"
+  top: "ip1"
+}
+
+layers {
+  name: "concat"
+  type: CONCAT
+  bottom: "ip1"
+  bottom: "headpose"
+  top: "cat_1"
+}
+
+
+layers {
+  name: "MVG_ip2"
+  type: INNER_PRODUCT
+  bottom: "cat_1"
+  top: "ip2"
+  blobs_lr: 1
+  blobs_lr: 2
+  inner_product_param {
+    num_output: 2
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+
+layers {
+  name: "MVG_accuracy"
+  type: ACCURACY
+  bottom: "ip2"
+  bottom: "gaze"
+  top: "accuracy"
+  include: { phase: TEST }
+}
+
+layers {
+  name: "MVG_loss"
+  type: EUCLIDEAN_LOSS
+  bottom: "ip2"
+  bottom: "gaze"
+  top: "loss"
+}
