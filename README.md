@@ -50,6 +50,10 @@ In Matlab:
 demo_multiperson()
 ```
 
+## CNN-based part detectors
+
+If you are interested in trying out our part detectors that produce dense confidence maps, check out the respective [project page](https://github.com/eldar/deepcut-cnn).
+
 ## Citation
 Please cite Deep(er)Cut in your publications if it helps your research:
 
