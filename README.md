@@ -1,9 +1,10 @@
 # Deep(er)Cut: Multi Person Pose Estimation
 
 This short documentation describes steps necessary to compile and run the code that implements [DeepCut](http://arxiv.org/abs/1511.06645) and [DeeperCut](http://arxiv.org/abs/1605.03170) papers:	
+
 **Leonid Pishchulin, Eldar Insafutdinov, Siyu Tang, Bjoern Andres, Mykhaylo Andriluka, Peter Gehler, and Bernt Schiele			  
 DeepCut: Joint Subset Partition and Labeling for Multi Person Pose Estimation	       
-In _IEEE Conference on Computer Vision and Pattern Recognition (CVPR)_, 2016*	       *
+In _IEEE Conference on Computer Vision and Pattern Recognition (CVPR)_, 2016**	       
 
 **Eldar Insafutdinov, Leonid Pishchulin, Bjoern Andres, Mykhaylo Andriluka, and Bernt Schiele   
 DeeperCut:  A Deeper, Stronger, and Faster Multi-Person Pose Estimation Model   
