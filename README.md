@@ -1,6 +1,10 @@
 # Deep(er)Cut: Multi Person Pose Estimation
 
 This short documentation describes steps necessary to compile and run the code that implements [DeepCut](http://arxiv.org/abs/1511.06645) and [DeeperCut](http://arxiv.org/abs/1605.03170) papers:	
+**Leonid Pishchulin, Eldar Insafutdinov, Siyu Tang, Bjoern Andres, Mykhaylo Andriluka, Peter Gehler, and Bernt Schiele			  
+DeepCut: Joint Subset Partition and Labeling for Multi Person Pose Estimation	       
+In _IEEE Conference on Computer Vision and Pattern Recognition (CVPR)_, 2016*	       *
+
 **Eldar Insafutdinov, Leonid Pishchulin, Bjoern Andres, Mykhaylo Andriluka, and Bernt Schiele   
 DeeperCut:  A Deeper, Stronger, and Faster Multi-Person Pose Estimation Model   
 arXiv:1605.03170, 2016**	
@@ -18,28 +22,28 @@ For more information visit http://pose.mpi-inf.mpg.de
 ## Installation Instructions
 
 1. Clone repository	
-```
-$ git clone https://github.com/eldar/deepcut --recursive
-```
+   ```
+   $ git clone https://github.com/eldar/deepcut --recursive
+   ```
 
 2. Build Caffe and its MATLAB interface after configuring `Makefile.config`	
-```
-$ cd external/caffe
-$ make -j 4 all matcaffe
-```
+   ```
+   $ cd external/caffe
+   $ make -j 4 all matcaffe
+   ```
 
-3. Build 'liblinear', specify the path to the MATLAB installation	
-```
-$ cd external/liblinear-1.94/matlab
-$ CC=gcc CXX=g++ MATLABDIR=/usr/lib/matlab-8.6/ make
-```
+3. Build `liblinear`, specify the path to the MATLAB installation	
+   ```
+   $ cd external/liblinear-1.94/matlab
+   $ CC=gcc CXX=g++ MATLABDIR=/usr/lib/matlab-8.6/ make
+   ```
 
 4. Build solver	
-```
-$ cd external/solver
-$ cmake . -DGUROBI_ROOT_DIR=/path/to/gurobi603/linux64 -DGUROBI_VERSION=60
-$ make solver-callback
-```
+   ```
+   $ cd external/solver
+   $ cmake . -DGUROBI_ROOT_DIR=/path/to/gurobi603/linux64 -DGUROBI_VERSION=60
+   $ make solver-callback
+   ```
 
 5. Obtain Gurobi license from http://www.gurobi.com/downloads/licenses/license-center
    and place the license file license.lic in data/gurobi or modify parameter 
@@ -52,21 +56,16 @@ $ ./download_models.sh
 ```
 
 ## Run Demo	
-1. Start MATLAB
 ```
 $ cd <root_dir>
 $ ./start_matlab.sh
+% in MATLAB
+>> demo_multiperson
 ```
 
-2. Run In MATLAB::
+## CNN-based part detectors
 
-```
-demo_multiperson()
-```
-
-## Stand-alone CNN-based part detectors
-
-Access [DeeperCut Part Detectors](https://github.com/eldar/deepcut-cnn) to download part detectors that produce dense confidence maps.
+Access [DeeperCut Part Detectors](https://github.com/eldar/deepcut-cnn) to download stand-alone part detectors that produce dense scoremaps.
 
 ## Citing
 ```
