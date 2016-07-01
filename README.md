@@ -1,14 +1,13 @@
 # Deep(er)Cut: Multi Person Pose Estimation
 
-Here you can find the code that implements [DeepCut](http://arxiv.org/abs/1511.06645)
-and [DeeperCut](http://arxiv.org/abs/1605.03170) papers.
+This short documentation describes steps necessary to compile and run the code that implements [DeepCut](http://arxiv.org/abs/1511.06645) and [DeeperCut](http://arxiv.org/abs/1605.03170) papers:	
+**Eldar Insafutdinov, Leonid Pishchulin, Bjoern Andres, Mykhaylo Andriluka, and Bernt Schiele   
+DeeperCut:  A Deeper, Stronger, and Faster Multi-Person Pose Estimation Model   
+arXiv:1605.03170, 2016**	
+For more information visit http://pose.mpi-inf.mpg.de
 
-## Installation instructions
-
-Only Linux 64bit is supported.
-
-Prerequisites:
-
+## Prerequisites
+- This code was developed under Linux (Debian wheezy, 64 bit) and was tested only in this environment.
 - HDF5 1.8
 - CMake
 - C++ 11
@@ -16,57 +15,73 @@ Prerequisites:
 - [Caffe building instructions](http://caffe.berkeleyvision.org/installation.html)
 - [Gurobi optimizer 6.0.x](https://user.gurobi.com/download/gurobi-optimizer)
 
-```bash
+## Installation Instructions
+
+1. Clone repository	
+```
 $ git clone https://github.com/eldar/deepcut --recursive
+```
 
-# build Caffe and its Matlab interface, for example, after properly configuring Makefile.config:
-$ cd pose/external/caffe
+2. Build Caffe and its MATLAB interface after configuring `Makefile.config`	
+```
+$ cd external/caffe
 $ make -j 4 all matcaffe
+```
 
-# build liblinear, specify the path to the Matlab installation
-$ cd ../liblinear-1.94/matlab
+3. Build 'liblinear', specify the path to the MATLAB installation	
+```
+$ cd external/liblinear-1.94/matlab
 $ CC=gcc CXX=g++ MATLABDIR=/usr/lib/matlab-8.6/ make
+```
 
-$ cd ../../solver
-$ cmake . -DGUROBI_ROOT_DIR=/some/path/gurobi603/linux64 -DGUROBI_VERSION=60
+4. Build solver	
+```
+$ cd external/solver
+$ cmake . -DGUROBI_ROOT_DIR=/path/to/gurobi603/linux64 -DGUROBI_VERSION=60
 $ make solver-callback
+```
 
-# Download models
-$ cd <root_dir>/data
+5. Obtain Gurobi license from http://www.gurobi.com/downloads/licenses/license-center
+   and place the license file license.lic in data/gurobi or modify parameter 
+   p.gurobi_license_file in lib/pose/exp_params.m to point to the license file location
+
+## Download models
+```
+$ cd data
 $ ./download_models.sh
+```
 
-# Obtain Gurobi license from http://www.gurobi.com/downloads/licenses/license-center
-# and place the license file license.lic in data/gurobi or modify parameter 
-# p.gurobi_license_file in lib/pose/exp_params.m to point to the license file location
-
+## Run Demo	
+1. Start MATLAB
+```
 $ cd <root_dir>
 $ ./start_matlab.sh
 ```
 
-In Matlab:
+2. Run In MATLAB::
 
-```matlab
-% Demo multi person pose estimation
+```
 demo_multiperson()
 ```
 
-## CNN-based part detectors
+## Stand-alone CNN-based part detectors
 
-If you are interested in trying out our part detectors that produce dense confidence maps, check out the respective [project page](https://github.com/eldar/deepcut-cnn).
+Access [DeeperCut Part Detectors](https://github.com/eldar/deepcut-cnn) to download part detectors that produce dense confidence maps.
 
-## Citation
-Please cite Deep(er)Cut in your publications if it helps your research:
-
-    @article{insafutdinov2016deepercut,
-        author = {Eldar Insafutdinov and Leonid Pishchulin and Bjoern Andres and Mykhaylo Andriluka and Bernt Schiele},
-        url = {http://arxiv.org/abs/1605.03170}
-        title = {DeeperCut: A Deeper, Stronger, and Faster Multi-Person Pose Estimation Model},
-        year = {2016}
+## Citing
+```
+@article{insafutdinov2016deepercut,
+	author = {Eldar Insafutdinov and Leonid Pishchulin and Bjoern Andres and Mykhaylo Andriluka and Bernt Schieke},
+	title = {DeeperCut: A Deeper, Stronger, and Faster Multi-Person Pose Estimation Model},
+	journal = {arXiv},
+	year = {2016},
+	url = {http://arxiv.org/abs/1605.03170}
     }
-
-    @inproceedings{pishchulin16cvpr,
-	    title = {DeepCut: Joint Subset Partition and Labeling for Multi Person Pose Estimation},
-	    booktitle = {CVPR'16},
-	    url = {},
-	    author = {Leonid Pishchulin and Eldar Insafutdinov and Siyu Tang and Bjoern Andres and Mykhaylo Andriluka and Peter Gehler and Bernt Schiele}
-    }
+@inproceedings{pishchulin16cvpr,
+	author = {Leonid Pishchulin and Eldar Insafutdinov and Siyu Tang and Bjoern Andres and Mykhaylo Andriluka and Peter Gehler and Bernt Schiele},
+	title = {DeepCut: Joint Subset Partition and Labeling for Multi Person Pose Estimation},
+	booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+	year = {2016},
+	url = {http://arxiv.org/abs/1511.06645}
+}
+```
