@@ -8,7 +8,7 @@ In _IEEE Conference on Computer Vision and Pattern Recognition (CVPR)_, 2016**
 
 **Eldar Insafutdinov, Leonid Pishchulin, Bjoern Andres, Mykhaylo Andriluka, and Bernt Schiele   
 DeeperCut:  A Deeper, Stronger, and Faster Multi-Person Pose Estimation Model   
-arXiv:1605.03170, 2016**	
+In _European Conference on Computer Vision (ECCV)_, 2016**	
 For more information visit http://pose.mpi-inf.mpg.de
 
 ## Prerequisites
@@ -73,7 +73,7 @@ Access [DeeperCut Part Detectors](https://github.com/eldar/deepcut-cnn) to downl
 @article{insafutdinov2016deepercut,
 	author = {Eldar Insafutdinov and Leonid Pishchulin and Bjoern Andres and Mykhaylo Andriluka and Bernt Schieke},
 	title = {DeeperCut: A Deeper, Stronger, and Faster Multi-Person Pose Estimation Model},
-	journal = {arXiv},
+	booktitle = {European Conference on Computer Vision (ECCV)},
 	year = {2016},
 	url = {http://arxiv.org/abs/1605.03170}
     }
