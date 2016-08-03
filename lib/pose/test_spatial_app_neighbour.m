@@ -434,11 +434,11 @@ for i = firstidx:lastidx
             [~,hostname] = unix('echo $HOSTNAME');
             
             fprintf('hostname: %s',hostname);
-            pre_cmd = ['export GRB_LICENSE_FILE=' p.gurobi_license_file ' '];
+            pre_cmd = ['export GRB_LICENSE_FILE=' p.gurobi_license_file];
 
             tic
             setenv('LD_LIBRARY_PATH', '');
-            s = unix([pre_cmd cmd]);
+            s = unix([pre_cmd '; ' cmd]);
             toc
             if (s > 0)
                 error('solver error');
